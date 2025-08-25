@@ -1,0 +1,280 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyPFskQssm5EDxDHmQn6o6Vb",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/drive/1vHWPpaqSnChvJCYqap8G2dnqYhB4-hm5#scrollTo=7XjHRBK5uH-g&line=9&uniqifier=1\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Evaluación 2\n",
+        "Python aplicado a la Ingeniería 202520\n",
+        "Docente: Miguel Ortiz\n",
+        "\n",
+        "Estudiante: Angel Tenorio\n",
+        "\n",
+        "email: angel.tenorio@upb.edu.co\n",
+        "\n",
+        "Fecha: 20/08/2025\n",
+        "\n",
+        "Crear un sistema básico de robots que demuestre los conceptos fundamentales de POO en Python"
+      ],
+      "metadata": {
+        "id": "3LX0AMF1v_ww"
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 17,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "8877EvoguxTx",
+        "outputId": "eaa746b9-498f-41e9-ce59-23e69eb1709b"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [EQUIPO los esquenal FORMADO
+                    jos-bot se unio al equipo los esquenal
+                    ponyo-bot se unio al equipo los esquenal
+                    shnehal-bot se unio al equipo los esquenal
+                    santiago-bot se unio al equipo los esquenal
+                    jos-bot BATERIA CARGADA🔋
+                    ponyo-bot BATERIA CARGADA🔋
+                    shnehal-bot BATERIA CARGADA🔋
+                    santiago-bot BATERIA CARGADA🔋
+                    Nombre:jos-bot - Modelo:A1 - Bateria:100 - Distancia Recorrida:0 - Velocidad:0 - Direcion:0
+                    Nombre:ponyo-bot - Modelo:A2 - Bateria:100 - Distancia Recorrida:0 - Velocidad:0 - Direcion:0
+                    Nombre:shnehal-bot - Modelo:A3 - Bateria:100 - Distancia Recorrida:0 - Velocidad:0 - Direcion:0
+                    Nombre:santiago-bot - Modelo:A4 - Bateria:100 - Distancia Recorrida:0 - Velocidad:0 - Direcion:0
+                    CARGANDO:40kg TOTAL:40kg
+                    MODO ALERTA: ON❗❗
+                    jos-bot BATERIA CARGADA🔋
+                    ponyo-bot BATERIA CARGADA🔋
+                    shnehal-bot BATERIA CARGADA🔋
+                    santiago-bot BATERIA CARGADA🔋
+                    Nombre:jos-bot - Modelo:A1 - Bateria:100 - Distancia Recorrida:0 - Velocidad:0 - Direcion:0
+                    Nombre:ponyo-bot - Modelo:A2 - Bateria:100 - Distancia Recorrida:0 - Velocidad:0 - Direcion:0
+                    Nombre:shnehal-bot - Modelo:A3 - Bateria:100 - Distancia Recorrida:0 - Velocidad:0 - Direcion:0
+                    Nombre:santiago-bot - Modelo:A4 - Bateria:100 - Distancia Recorrida:0 - Velocidad:0 - Direcion:0
+                    ROBOTS DEL EQUIPO:4 MISSIONES COMPLETAS:0
+                    Nombre:jos-bot - Modelo:A1 - Bateria:66.66666666666667 - Distancia Recorrida:3.333333333333333 - Velocidad:20 - Direcion:40
+                    Nombre:ponyo-bot - Modelo:A2 - Bateria:50.0 - Distancia Recorrida:5.0 - Velocidad:20 - Direcion:40
+                    Nombre:shnehal-bot - Modelo:A3 - Bateria:83.33333333333334 - Distancia Recorrida:1.6666666666666665 - Velocidad:20 - Direcion:40
+                    Nombre:santiago-bot - Modelo:A4 - Bateria:80.0 - Distancia Recorrida:1.6666666666666665 - Velocidad:10 - Direcion:90
+                    ROBOTS DEL EQUIPO:4 MISSIONES COMPLETAS:0
+                    jos-bot BATERIA CARGADA🔋
+                    ponyo-bot BATERIA CARGADA🔋
+                    shnehal-bot BATERIA CARGADA🔋
+                    santiago-bot BATERIA CARGADA🔋
+                    ¡MISSION COMPLETADA! TOTAL:1                    
+                ]
+        }
+      ],
+      "source": [
+        "#clase base
+class robot:
+  #atributos de instacia
+  def __init__(self, name, model, battery = 100, distance_traveled = 0, speed = 0, direction = 0):
+    self.name = name
+    self.model = model
+    self.battery = battery
+    self.distance_traveled = distance_traveled
+    self.speed = speed
+    self.direction = direction
+
+  def __str__(self):
+    return f"{self.name} {self.model} - Bateria:{self.battery}% - Distancia:{self.distance_traveled}km"
+
+#metodo mover
+  def move(self, speed, direction, time_minutes):
+    #verificamos velocidad y direccion
+    self.speed = speed
+    self.direction = direction
+    self.time_minutes = time_minutes
+    distancia = speed*(time_minutes/60) #calculamos la distancia
+    self.distance_traveled += distancia #sumamos la distancia a la variable de instancia correspondiente
+    consumo = distancia*10
+    self.battery -= consumo
+    if self.battery < 20:
+      print("¡BATERIA BAJA!🪫")
+    return
+
+#metodo cargar bateria
+  def charge(self, time_minutes):
+    self.battery += time_minutes*2
+    if self.battery > 100:
+      self.battery = 100
+      print(f"{self.name} BATERIA CARGADA🔋")
+      return
+    print(f"{self.name} CARGANDO... Bateria: {self.battery}%")
+    return
+
+#Obtener la informacion del robot
+  def get_status(self):
+    print(f"Nombre:{self.name} - Modelo:{self.model} - Bateria:{self.battery} - Distancia Recorrida:{self.distance_traveled} - Velocidad:{self.speed} - Direcion:{self.direction}")
+    return
+
+
+class workedrobot(robot):
+  def __init__(self, name, model, battery = 100, distance_traveled = 0, speed = 0, direction = 0, cargo = 0):
+    super().__init__(name, model, battery, distance_traveled, speed, direction)
+    self.cargo = cargo
+  def move(self, speed, direction, time_minutes):
+    #verificamos velocidad y direccion
+    self.speed = speed
+    self.direction = direction
+    self.time_minutes = time_minutes
+    distancia = speed*(time_minutes/60) #calculamos la distancia
+    self.distance_traveled += distancia #sumamos la distancia a la variable de instancia correspondiente
+    consumo = 1.2*(distancia*10) #20% mas de consumo
+    self.battery -= consumo
+    if self.battery < 20:
+      print("¡BATERIA BAJA!🪫")
+    return
+
+  def load_cargo(self, weight):
+    self.cargo +=weight
+    print(f"CARGANDO:{weight}kg TOTAL:{self.cargo}kg")
+    return
+
+  def unload_cargo(self):
+    self.cargo = 0
+    print("CARGA DESCARGADA")
+    return
+
+
+class guardrobot(robot):
+  def __init__(self, name, model, battery = 100, distance_traveled = 0, speed = 0, direction = 0, alert_mode = False):
+    super().__init__(name, model, battery, distance_traveled, speed, direction)
+    self.alert_mode = alert_mode
+
+  def charge(self, time_minutes):
+    self.battery += 0.5*(time_minutes*2) #Carga 50% mas lento
+    if self.battery > 100:
+      self.battery = 100
+      print(f"{self.name} BATERIA CARGADA🔋")
+      return
+    print(f"{self.name} CARGANDO... Bateria: {self.battery}%")
+    return
+
+  def toggle_alert(self):
+    if self.alert_mode == False:
+      self.alert_mode = True
+      print("MODO ALERTA: ON❗❗")
+    else:
+      self.alert_mode = False
+      print("MODO ALERTA: OFF")
+    return
+
+class Robot_team:
+  def __init__(self, team_name, robots=None, missions_complete=0):
+    self.team_name = team_name
+    self.robots = robots or []
+    self.missions_complete = missions_complete
+    print(f"EQUIPO {self.team_name} FORMADO")
+
+  def add_robot(self, robot):
+    self.robots.append(robot)
+    print(f"{robot.name} se unio al equipo {self.team_name}")
+
+  def __len__(self):
+    return len(self.robots)
+
+  def charge_all(self, time_minutes):
+    for robot in self.robots:
+      robot.charge(time_minutes)
+    return
+
+  def team_status(self):
+    for robot in self.robots:
+      robot.get_status()
+
+    print(f"ROBOTS DEL EQUIPO:{len(self)} MISSIONES COMPLETAS:{self.missions_complete}")
+
+    return
+
+  def complete_missions(self):
+    self.missions_complete += 1
+    print(f"¡MISSION COMPLETADA! TOTAL:{self.missions_complete}")
+    return
+
+
+
+
+
+#lista de robots
+Robot1 = robot("jos-bot", "A1")
+Robot2 = robot("ponyo-bot","A2")
+Robot3 = guardrobot("shnehal-bot", "A3")
+Robot4 = workedrobot("santiago-bot","A4")
+
+equipo1 = Robot_team("los esquenal")
+
+#agregar los robots a la lista
+
+equipo1.add_robot(Robot1)
+
+equipo1.add_robot(Robot2)
+
+equipo1.add_robot(Robot3)
+equipo1.add_robot(Robot4)
+
+#cargar cada robot
+Robot1.charge(time_minutes=30)
+Robot2.charge(time_minutes=30)
+Robot3.charge(time_minutes=30)
+Robot4.charge(time_minutes=30)
+#mostrar estatus de cada robot
+Robot1.get_status()
+Robot2.get_status()
+Robot3.get_status()
+Robot4.get_status()
+
+#funciones especiales
+Robot4.load_cargo(weight=40)
+Robot3.toggle_alert()
+
+#cargar a todos los robots
+equipo1.charge_all(time_minutes=20)
+
+len(equipo1) #mostrar cantidad de la lista de robots
+equipo1.team_status()
+Robot1.move(20, 40, 10)
+Robot2.move(20, 40, 15)
+Robot3.move(20, 40, 5)
+Robot4.move(10, 90, 10)
+equipo1.team_status() #estatus del equipo
+equipo1.charge_all(time_minutes=60) #cargar bateria
+equipo1.complete_missions()
+
+"
+      ]
+    }
+  ]
+}
