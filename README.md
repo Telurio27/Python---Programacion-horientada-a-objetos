@@ -1,4 +1,4 @@
-# Python---Programacion-horientada-a-objetos 2025
+# Python---Programacion-orientada-a-objetos 2025
 
 ## Universidad Pontificia Bolivariana - Montería
 
